@@ -11,4 +11,3 @@
 - Resource group name for AKS cluster
 - AKS cluster name
 - AKS cluster location (Example: japaneast)
-
