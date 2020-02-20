@@ -38,7 +38,7 @@ def get_automation_runas_credential(runas_connection, resource_url, authority_ur
 
 def deallocate_vmss(compute_client, resource_group, vmss_name):
     print('\n' + 'VMSS: ' + vmss_name)
-    async_vmss_deallocate = compute_client.virtual_machine_scale_sets.start(resource_group, vmss_name)
+    async_vmss_deallocate = compute_client.virtual_machine_scale_sets.deallocate(resource_group, vmss_name)
     async_vmss_deallocate.wait()
 
 # Authenticate to Azure using the Azure Automation RunAs service principal
