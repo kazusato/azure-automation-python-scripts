@@ -37,7 +37,7 @@ def get_automation_runas_credential(runas_connection, resource_url, authority_ur
     )
 
 def deallocate_vmss(compute_client, resource_group, vmss_name):
-    print('\n' + vmss_name)
+    print('\n' + 'VMSS: ' + vmss_name)
     async_vmss_deallocate = compute_client.virtual_machine_scale_sets.start(resource_group, vmss_name)
     async_vmss_deallocate.wait()
 
@@ -52,14 +52,15 @@ azure_credential = get_automation_runas_credential(runas_connection, resource_ur
 compute_client = ComputeManagementClient(azure_credential, str(runas_connection["SubscriptionId"]))
 
 # Constructing the VMSS resource group name from the cluster's RG/cluster/location names.
-cluster_rg_name = str(sys.argv[0])
-cluster_name = str(sys.argv[1])
-cluster_location = str(sys.argv[2])
+cluster_rg_name = str(sys.argv[1])
+cluster_name = str(sys.argv[2])
+cluster_location = str(sys.argv[3])
 mc_rg_name = 'MC_' + cluster_rg_name + '_' + cluster_name + '_' + cluster_location
+print 'Target resource group for VMSS: ' + mc_rg_name
 
 # Get VMSS list
 vmss_list = compute_client.virtual_machine_scale_sets.list(mc_rg_name)
 
 # Start VMSS
-for vmss in vmss_list
-	deallocate_vmss(compute_client, mc_rg_name, vmss)
+for vmss in vmss_list:
+	deallocate_vmss(compute_client, mc_rg_name, vmss.name)
