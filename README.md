@@ -11,3 +11,7 @@
 - Resource group name for AKS cluster
 - AKS cluster name
 - AKS cluster location (Example: japaneast)
+
+# Updating automation modules may be required
+
+- https://github.com/Microsoft/AzureAutomation-Account-Modules-Update
